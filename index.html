@@ -4,22 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actu Sport Togo | Sergio</title>
-    <!-- SCRIPT INDISPENSABLE POUR ACTIVER LA FENÊTRE DE CONNEXION -->
+    <!-- SCRIPT N°1 : Permet d'afficher la fenêtre de création de mot de passe -->
     </script>
+    
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; background-color: #f4f4f4; }
+        header { background: #d32f2f; color: white; padding: 20px; border-radius: 10px; }
+        #articles { margin-top: 30px; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    </style>
 </head>
 <body>
+
     <header>
         <h1>ACTU SPORT TOGO</h1>
-        <p>Toutes les news sportives en direct</p>
+        <p>Toutes les news sportives en direct par Joseph D.</p>
     </header>
 
     <div id="articles">
         <!-- Tes articles apparaîtront ici automatiquement plus tard -->
-        <p>Les actualités arrivent bientôt...</p>
+        <p>Les actualités arrivent bientôt... Connectez-vous à l'admin pour rédiger.</p>
     </div>
 
+    <!-- SCRIPT N°2 : Gère la redirection et l'ouverture de la session -->
     <script>
-      // Ce code redirige vers l'admin après la connexion
       if (window.netlifyIdentity) {
         window.netlifyIdentity.on("init", user => {
           if (!user) {
