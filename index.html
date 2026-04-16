@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actu Sport Togo | Sergio</title>
+    <!-- Ce script permet de gérer la connexion sécurisée (Login) -->
+    </script>
+</head>
+<body>
+    <header>
+        <h1>ACTU SPORT TOGO</h1>
+        <p>Toutes les news sportives en direct</p>
+    </header>
+
+    <div id="articles">
+        <!-- Tes articles apparaîtront ici automatiquement plus tard -->
+        <p>Les actualités arrivent bientôt...</p>
+    </div>
+
+    <script>
+      // Ce code redirige vers l'admin après la connexion
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
+</body>
+</html>
