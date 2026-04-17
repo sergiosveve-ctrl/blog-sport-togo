@@ -2,8 +2,7 @@ backend:
   name: github
   repo: sergiosveve-ctrl/blog-sport-togo
   branch: main
-  # L'URL ci-dessous doit être celle de ton site sur Cloudflare
-  base_url: https://blog-sport-togo.pages.dev 
+  base_url: https://blog-sport-togo.sergiosveve.workers.dev
   auth_endpoint: /auth
 
 media_folder: "img"
