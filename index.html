@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actu Sport Togo | Sergio</title>
+    <title>FootPulse | Actu Sport & Pronos</title>
     
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -11,6 +11,7 @@
     <style>
         :root {
             --primary: #d32f2f;
+            --accent: #2e7d32; /* Vert pour le côté "Bet/Gagnant" */
             --dark: #121212;
             --light: #ffffff;
             --gray: #f8f9fa;
@@ -18,8 +19,9 @@
 
         body { font-family: 'Inter', sans-serif; margin: 0; background-color: var(--gray); color: var(--dark); }
 
+        /* Header dynamique */
         header { 
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1350&q=80');
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1504450758481-7338eba7524a?auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
             color: var(--light); 
@@ -28,13 +30,34 @@
             clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
         }
 
-        header h1 { font-family: 'Oswald', sans-serif; font-size: 4.5em; margin: 0; text-transform: uppercase; letter-spacing: -2px; line-height: 1; }
-        header p { font-size: 1.3em; opacity: 0.9; margin-top: 15px; font-weight: 400; }
+        header h1 { font-family: 'Oswald', sans-serif; font-size: 5em; margin: 0; text-transform: uppercase; letter-spacing: -2px; line-height: 1; }
+        header p { font-size: 1.3em; opacity: 0.9; margin-top: 15px; font-weight: 400; text-transform: uppercase; letter-spacing: 2px; }
 
-        #articles { max-width: 1100px; margin: -80px auto 100px; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 30px; }
+        /* Bannière Promo 1XBET */
+        .promo-banner {
+            max-width: 1100px;
+            margin: -40px auto 40px;
+            background: linear-gradient(90deg, #1a237e, #0d47a1); /* Bleu 1xbet */
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 10;
+        }
+
+        .promo-text { display: flex; align-items: center; gap: 15px; }
+        .promo-badge { background: #ffeb3b; color: #000; padding: 5px 12px; border-radius: 5px; font-weight: 800; font-size: 0.9em; }
+        .promo-code { font-family: 'Oswald', sans-serif; font-size: 1.8em; color: #fff; border: 2px dashed rgba(255,255,255,0.5); padding: 5px 20px; border-radius: 8px; margin-left: 10px; }
+
+        /* Grille d'articles */
+        #articles { max-width: 1100px; margin: 0 auto 100px; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 30px; }
 
         .article-card { background: var(--light); border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.08); transition: all 0.3s ease; display: flex; flex-direction: column; }
-        .article-card:hover { transform: translateY(-12px); box-shadow: 0 30px 60px rgba(211, 47, 47, 0.15); }
+        .article-card:hover { transform: translateY(-12px); box-shadow: 0 30px 60px rgba(0,0,0,0.15); }
 
         .img-container { position: relative; width: 100%; height: 240px; overflow: hidden; }
         .article-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
@@ -44,27 +67,37 @@
 
         .article-content { padding: 30px; flex-grow: 1; }
         .article-date { font-size: 0.9em; color: #999; margin-bottom: 12px; display: block; font-weight: 600; }
-        .article-card h2 { font-family: 'Oswald', sans-serif; margin: 0 0 15px 0; font-size: 1.8em; line-height: 1.2; }
+        .article-card h2 { font-family: 'Oswald', sans-serif; margin: 0 0 15px 0; font-size: 1.8em; line-height: 1.2; color: var(--dark); }
         .article-body { color: #555; line-height: 1.7; font-size: 1em; }
         
         .loading { grid-column: 1 / -1; text-align: center; padding: 100px; font-weight: 600; color: var(--primary); font-size: 1.2em; }
 
-        @media (max-width: 600px) {
-            header h1 { font-size: 3em; }
-            header { padding: 80px 20px; }
-            #articles { margin-top: -40px; }
+        /* Mobile */
+        @media (max-width: 768px) {
+            header h1 { font-size: 3.5em; }
+            .promo-banner { flex-direction: column; text-align: center; gap: 15px; margin: -30px 20px 40px; }
+            .promo-text { flex-direction: column; }
+            .promo-code { margin-left: 0; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>ACTU SPORT TOGO</h1>
-        <p>L'actualité des Éperviers et du sport togolais en direct</p>
+        <h1>FOOTPULSE</h1>
+        <p>L'actu foot, les meilleurs pronos et le sport en direct</p>
     </header>
 
+    <div class="promo-banner">
+        <div class="promo-text">
+            <span class="promo-badge">OFFRE 1XBET</span>
+            <span>Bonus de 200% sur ton premier dépôt avec le code :</span>
+        </div>
+        <div class="promo-code">YOUNO4</div>
+    </div>
+
     <div id="articles">
-        <div class="loading">ANALYSE DU TERRAIN EN COURS...</div>
+        <div class="loading">CHARGEMENT DES INFOS...</div>
     </div>
 
     <script>
@@ -114,7 +147,7 @@
                     `;
                 }
             } catch (e) { 
-                container.innerHTML = "<div class='loading'>Oups ! Impossible de charger les articles. Vérifie ta connexion ou le dépôt GitHub.</div>"; 
+                container.innerHTML = "<div class='loading'>Impossible de charger les articles.</div>"; 
             }
         }
         fetchBlog();
