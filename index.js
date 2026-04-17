@@ -12,6 +12,7 @@ export default {
     // 2. Route pour le retour GitHub (Callback)
     if (url.pathname === "/callback") {
       const code = url.searchParams.get("code");
+      
       const response = await fetch("https://github.com/login/oauth/access_token", {
         method: "POST",
         headers: {
@@ -24,12 +25,21 @@ export default {
           code,
         }),
       });
+      
       const result = await response.json();
+      
+      // LA CORRECTION EST ICI : On récupère l'access_token de GitHub
+      const token = result.access_token;
+      
+      // Et on l'envoie à Decap CMS sous le nom exact "token" qu'il attend
       return new Response(
         `<html><body><script>
           (function() {
             function receiveMessage(e) {
-              window.opener.postMessage('authorization:github:success:${JSON.stringify(result)}', e.origin);
+              window.opener.postMessage(
+                'authorization:github:success:{"token":"${token}","provider":"github"}', 
+                e.origin
+              );
             }
             window.addEventListener("message", receiveMessage, false);
             window.opener.postMessage("authorizing:github", "*");
