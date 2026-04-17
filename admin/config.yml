@@ -1,7 +1,10 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: sergiosveve-ctrl/blog-sport-togo
   branch: main
-  repo: sergiosveve-ctrl/blog-sport-togo # Ton identifiant GitHub corrigé
+  # L'URL ci-dessous doit être celle de ton site sur Cloudflare
+  base_url: https://blog-sport-togo.pages.dev 
+  auth_endpoint: /auth
 
 media_folder: "img"
 public_folder: "/img"
@@ -9,10 +12,11 @@ public_folder: "/img"
 collections:
   - name: "blog"
     label: "Articles de Sport"
-    folder: "blog" # Les articles seront créés dans ce dossier
+    folder: "blog"
     create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - {label: "Titre", name: "title", widget: "string"}
       - {label: "Date", name: "date", widget: "datetime"}
-      - {label: "Image", name: "image", widget: "image"}
+      - {label: "Image de couverture", name: "image", widget: "image"}
       - {label: "Contenu de l'article", name: "body", widget: "markdown"}
