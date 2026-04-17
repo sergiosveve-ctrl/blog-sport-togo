@@ -5,3 +5,7 @@ compatibility_date = "2024-04-01"
 [assets]
 directory = "."
 binding = "ASSETS"
+
+[vars]
+GITHUB_CLIENT_ID = "Ov23liMuv9vuCeAQarxO"
+GITHUB_CLIENT_SECRET = "c1a2fdd724e6571534ab50c6a645973f61369a71"
