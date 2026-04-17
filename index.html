@@ -12,15 +12,12 @@
         :root { --primary: #d32f2f; --dark: #121212; --light: #ffffff; --gray: #f8f9fa; }
         body { font-family: 'Inter', sans-serif; margin: 0; background-color: var(--gray); color: var(--dark); }
         
-        /* Header & Nav */
         header { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1504450758481-7338eba7524a?auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-position: center; color: var(--light); padding: 80px 20px; text-align: center; clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%); }
         header h1 { font-family: 'Oswald', sans-serif; font-size: 4em; margin: 0; cursor: pointer; }
         
-        /* Bannière Promo */
         .promo-banner { max-width: 1100px; margin: -30px auto 30px; background: linear-gradient(90deg, #1a237e, #0d47a1); color: white; padding: 15px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative; z-index: 10; font-size: 0.9em; }
         .promo-code { font-family: 'Oswald', sans-serif; font-size: 1.5em; background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 8px; }
 
-        /* Grille & Articles */
         #content { max-width: 1100px; margin: 0 auto 50px; padding: 0 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
         
@@ -34,19 +31,26 @@
         /* Vue Article Complet */
         .full-article { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-top: -50px; position: relative; }
         .full-article img { width: 100%; max-height: 500px; object-fit: cover; border-radius: 15px; margin-bottom: 30px; }
-        .full-article h1 { font-family: 'Oswald', sans-serif; font-size: 3em; margin-bottom: 20px; }
+        .full-article h1 { font-family: 'Oswald', sans-serif; font-size: 3em; margin-bottom: 10px; }
         .full-article-body { line-height: 1.8; font-size: 1.1em; color: #333; }
         .back-btn { display: inline-block; margin-bottom: 20px; color: var(--primary); text-decoration: none; font-weight: 700; text-transform: uppercase; cursor: pointer; }
 
-        /* Footer Stylisé */
+        /* Barre de Partage et Like */
+        .share-bar { display: flex; align-items: center; gap: 15px; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee; flex-wrap: wrap; }
+        .btn-action { padding: 8px 15px; border-radius: 50px; border: none; cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.9em; transition: 0.3s; text-decoration: none; }
+        .btn-like { background: #f0f0f0; color: #555; }
+        .btn-like.active { background: #ffebee; color: var(--primary); transform: scale(1.1); }
+        .btn-fb { background: #1877f2; color: white; }
+        .btn-wa { background: #25d366; color: white; }
+        .btn-tw { background: #000; color: white; }
+
         footer { background: var(--dark); color: white; padding: 60px 20px 30px; margin-top: 50px; text-align: center; clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%); }
         .footer-content { max-width: 1100px; margin: 0 auto; }
         .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; margin: 30px 0; }
         .footer-link { color: white; text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: 500; transition: opacity 0.3s; }
-        .footer-link:hover { opacity: 0.8; }
         .icon-circle { background: rgba(255,255,255,0.1); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; }
 
-        @media (max-width: 600px) { .promo-banner { flex-direction: column; text-align: center; gap: 10px; margin: -20px 20px 30px; } .full-article { padding: 20px; } .footer-links { flex-direction: column; align-items: center; } }
+        @media (max-width: 600px) { .promo-banner { flex-direction: column; text-align: center; gap: 10px; margin: -20px 20px 30px; } .full-article { padding: 20px; } .full-article h1 { font-size: 2em; } }
     </style>
 </head>
 <body>
@@ -70,22 +74,12 @@
         <div class="footer-content">
             <h2 style="font-family: 'Oswald', sans-serif; font-size: 2.5em; margin: 0;">FOOTPULSE</h2>
             <p style="opacity: 0.7;">Toute l'actualité sportive du Togo et du monde.</p>
-            
             <div class="footer-links">
-                <a href="mailto:amevi7001@gmail.com" class="footer-link">
-                    <span class="icon-circle" style="background: var(--primary);">✉</span> amevi7001@gmail.com
-                </a>
-                <a href="https://wa.me/22870019362" class="footer-link">
-                    <span class="icon-circle" style="background: #25d366;">W</span> +228 70 01 93 62
-                </a>
-                <a href="https://www.facebook.com/profile.php?id=100089777319687" target="_blank" class="footer-link">
-                    <span class="icon-circle" style="background: #1877f2;">f</span> Facebook
-                </a>
+                <a href="mailto:amevi7001@gmail.com" class="footer-link"><span class="icon-circle" style="background: var(--primary);">✉</span> amevi7001@gmail.com</a>
+                <a href="https://wa.me/22870019362" class="footer-link"><span class="icon-circle" style="background: #25d366;">W</span> +228 70 01 93 62</a>
+                <a href="https://www.facebook.com/profile.php?id=100089777319687" target="_blank" class="footer-link"><span class="icon-circle" style="background: #1877f2;">f</span> Facebook</a>
             </div>
-            
-            <div style="font-size: 0.8em; opacity: 0.4; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-top: 20px;">
-                &copy; 2026 FootPulse - Sergio Projets
-            </div>
+            <div style="font-size: 0.8em; opacity: 0.4; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-top: 20px;">&copy; 2026 FootPulse - Jo D. Projets</div>
         </div>
     </footer>
 
@@ -132,12 +126,23 @@
 
                 const title = (meta.match(/title:\s*"(.*)"/) || meta.match(/title:\s*(.*)/) || ["","Sans titre"])[1];
                 const image = (meta.match(/image:\s*"(.*)"/) || meta.match(/image:\s*(.*)/) || ["",""])[1];
+                
+                const currentUrl = encodeURIComponent(window.location.href);
+                const shareText = encodeURIComponent("À lire sur FootPulse : " + title);
 
                 mainView.innerHTML = `
                     <div class="full-article">
-                        <div class="back-btn" onclick="window.location.href='index.html'">← Retour aux actus</div>
+                        <div class="back-btn" onclick="window.location.href='index.html'">← Retour</div>
                         ${image ? `<img src="${image}">` : ''}
                         <h1>${title}</h1>
+                        
+                        <div class="share-bar">
+                            <button class="btn-action btn-like" onclick="this.classList.toggle('active')">❤️ J'aime</button>
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=${currentUrl}" target="_blank" class="btn-action btn-fb">Partager</a>
+                            <a href="https://wa.me/?text=${shareText}%20${currentUrl}" target="_blank" class="btn-action btn-wa">WhatsApp</a>
+                            <a href="https://twitter.com/intent/tweet?url=${currentUrl}&text=${shareText}" target="_blank" class="btn-action btn-tw">X</a>
+                        </div>
+
                         <div class="full-article-body">${marked.parse(body)}</div>
                     </div>`;
                 window.scrollTo(0,0);
@@ -146,12 +151,7 @@
 
         const params = new URLSearchParams(window.location.search);
         const articleToRead = params.get('p');
-
-        if (articleToRead) {
-            loadSingle(articleToRead);
-        } else {
-            loadList();
-        }
+        if (articleToRead) { loadSingle(articleToRead); } else { loadList(); }
     </script>
 </body>
 </html>
