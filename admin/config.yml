@@ -2,7 +2,7 @@ backend:
   name: github
   repo: sergiosveve-ctrl/blog-sport-togo
   branch: main
-  base_url: https://blog-sport-togo.sergiosveve.workers.dev
+  base_url: https://blog-sport-togo.footpulse.workers.dev
   auth_endpoint: /auth
 
 media_folder: "img"
