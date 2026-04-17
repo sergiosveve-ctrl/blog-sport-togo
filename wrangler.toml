@@ -1,9 +1,7 @@
 name = "blog-sport-togo"
+main = "index.js"
 compatibility_date = "2024-04-01"
 
 [assets]
 directory = "."
-
-# Cette section force Cloudflare à voir ton projet comme un "vrai" Worker
-[http]
-node_compat = true
+binding = "ASSETS"
