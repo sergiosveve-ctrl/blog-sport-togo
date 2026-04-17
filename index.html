@@ -21,7 +21,7 @@
         .promo-code { font-family: 'Oswald', sans-serif; font-size: 1.5em; background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 8px; }
 
         /* Grille & Articles */
-        #content { max-width: 1100px; margin: 0 auto 100px; padding: 0 20px; }
+        #content { max-width: 1100px; margin: 0 auto 50px; padding: 0 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
         
         .article-card { background: var(--light); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; text-decoration: none; color: inherit; }
@@ -38,7 +38,15 @@
         .full-article-body { line-height: 1.8; font-size: 1.1em; color: #333; }
         .back-btn { display: inline-block; margin-bottom: 20px; color: var(--primary); text-decoration: none; font-weight: 700; text-transform: uppercase; cursor: pointer; }
 
-        @media (max-width: 600px) { .promo-banner { flex-direction: column; text-align: center; gap: 10px; margin: -20px 20px 30px; } .full-article { padding: 20px; } }
+        /* Footer Stylisé */
+        footer { background: var(--dark); color: white; padding: 60px 20px 30px; margin-top: 50px; text-align: center; clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%); }
+        .footer-content { max-width: 1100px; margin: 0 auto; }
+        .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; margin: 30px 0; }
+        .footer-link { color: white; text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: 500; transition: opacity 0.3s; }
+        .footer-link:hover { opacity: 0.8; }
+        .icon-circle { background: rgba(255,255,255,0.1); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; }
+
+        @media (max-width: 600px) { .promo-banner { flex-direction: column; text-align: center; gap: 10px; margin: -20px 20px 30px; } .full-article { padding: 20px; } .footer-links { flex-direction: column; align-items: center; } }
     </style>
 </head>
 <body>
@@ -58,12 +66,34 @@
         </div>
     </div>
 
+    <footer>
+        <div class="footer-content">
+            <h2 style="font-family: 'Oswald', sans-serif; font-size: 2.5em; margin: 0;">FOOTPULSE</h2>
+            <p style="opacity: 0.7;">Toute l'actualité sportive du Togo et du monde.</p>
+            
+            <div class="footer-links">
+                <a href="mailto:amevi7001@gmail.com" class="footer-link">
+                    <span class="icon-circle" style="background: var(--primary);">✉</span> amevi7001@gmail.com
+                </a>
+                <a href="https://wa.me/22870019362" class="footer-link">
+                    <span class="icon-circle" style="background: #25d366;">W</span> +228 70 01 93 62
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100089777319687" target="_blank" class="footer-link">
+                    <span class="icon-circle" style="background: #1877f2;">f</span> Facebook
+                </a>
+            </div>
+            
+            <div style="font-size: 0.8em; opacity: 0.4; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-top: 20px;">
+                &copy; 2026 FootPulse - Sergio Projets
+            </div>
+        </div>
+    </footer>
+
     <script>
         const repo = "sergiosveve-ctrl/blog-sport-togo";
         const folder = "blog";
         const mainView = document.getElementById('main-view');
 
-        // Fonction pour charger la LISTE des articles
         async function loadList() {
             try {
                 const response = await fetch(`https://api.github.com/repos/${repo}/contents/${folder}`);
@@ -92,7 +122,6 @@
             } catch (e) { mainView.innerHTML = "Erreur de chargement."; }
         }
 
-        // Fonction pour charger UN SEUL article complet
         async function loadSingle(fileName) {
             try {
                 const response = await fetch(`https://raw.githubusercontent.com/${repo}/main/${folder}/${fileName}`);
@@ -111,10 +140,10 @@
                         <h1>${title}</h1>
                         <div class="full-article-body">${marked.parse(body)}</div>
                     </div>`;
+                window.scrollTo(0,0);
             } catch (e) { mainView.innerHTML = "Article introuvable."; }
         }
 
-        // Système de routage simple
         const params = new URLSearchParams(window.location.search);
         const articleToRead = params.get('p');
 
