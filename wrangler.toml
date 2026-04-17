@@ -1,10 +1,5 @@
 name = "blog-sport-togo"
 compatibility_date = "2026-04-17"
 
-# On dit à Cloudflare que tes fichiers (index.html, etc.) sont à la racine
 [assets]
 directory = "."
-binding = "ASSETS"
-
-[vars]
-# Tes clés GitHub seront lues ici une fois ajoutées dans le tableau de bord
