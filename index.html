@@ -479,7 +479,6 @@
 
     async function incrementField(articleId, field) {
         // S'assure que la ligne existe puis incrémente
-        await sbUpsert("article_stats", { id: articleId, views: 0, likes: 0, shares: 0 });
         await fetch(`${SUPABASE_URL}/rest/v1/article_stats?id=eq.${encodeURIComponent(articleId)}`, {
             method: "PATCH",
             headers: { ...sbHeaders(), "Prefer": "return=minimal" },
@@ -602,7 +601,6 @@
             const { title, image, body, date } = extractMeta(content);
 
             // Incrémenter les vues
-            await sbUpsert("article_stats", { id: fileName, views: 0, likes: 0, shares: 0 }).catch(()=>{});
             // ✅ CORRECTION : await ajouté pour attendre l'incrément avant de lire les stats
             await fetch(`${SUPABASE_URL}/rest/v1/rpc/increment_stat`, {
                 method: "POST", headers: sbHeaders(),
@@ -639,7 +637,7 @@
 
                         <div class="stats-bar">
                             <div class="stat-pill">👁 <strong id="view-count">${(stats.views||0)+1}</strong> vues</div>
-                            <div class="stat-pill">❤️ <strong id="like-count">${(stats.likes||0) + (liked ? 1 : 0)}</strong> likes</div>
+                            <div class="stat-pill">❤️ <strong id="like-count">${stats.likes||0}</strong> likes</div> likes</div>
                             <div class="stat-pill">🔗 <strong id="share-count">${stats.shares||0}</strong> partages</div>
                             ${date ? `<div class="stat-pill">📅 ${formatDate(date)}</div>` : ''}
                         </div>
