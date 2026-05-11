@@ -1,6 +1,16 @@
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    // ═══════════════════════════════════════════
+    // TEST DIAGNOSTIC - À SUPPRIMER APRÈS
+    // ═══════════════════════════════════════════
+    const testParam = url.searchParams.get("p");
+    if (testParam) {
+      return new Response("Param p = " + testParam, { status: 200 });
+    }
+    // ═══════════════════════════════════════════
+
     const userAgent = request.headers.get("user-agent") || "";
 
     // ═══════════════════════════════════════════════════════
@@ -82,58 +92,6 @@ export default {
         </script></body></html>`,
         { headers: { "content-type": "text/html" } }
       );
-    }
-
-        // ═══════════════════════════════════════════════════════
-    // OPEN GRAPH - POUR TOUTES LES REQUÊTES AVEC ?p=
-    // ═══════════════════════════════════════════════════════
-    const articleParam = url.searchParams.get("p");
-
-    if (articleParam) {
-      const baseUrl = "https://blog-sport-togo.footpulse.workers.dev";
-      
-      try {
-        const res = await fetch(
-          `https://raw.githubusercontent.com/sergiosveve-ctrl/blog-sport-togo/main/blog/${articleParam}`
-        );
-        const content = await res.text();
-        
-        const parts = content.split('---');
-        const meta = parts.length > 1 ? parts[1] : "";
-        const ogTitle = (meta.match(/title:\s*"(.*?)"/) || meta.match(/title:\s*(.+)/) || ["", "FootPulse"])[1].trim();
-        const ogImage = (meta.match(/image:\s*"(.*?)"/) || meta.match(/image:\s*(.+)/) || ["", "https://images.unsplash.com/photo-1504450758481-7338eba7524a?auto=format&fit=crop&w=1200&q=80"])[1].trim();
-        const ogDescription = (meta.match(/description:\s*"(.*?)"/) || meta.match(/description:\s*(.+)/) || ["", "L'actu foot et omnisports en direct sur FootPulse"])[1].trim();
-
-        // Récupère le HTML normal
-        const asset = await env.ASSETS.fetch(request);
-        let html = await asset.text();
-
-        // Injecte les balises OG dans le <head>
-        const ogTags = `
-  <!-- Open Graph -->
-  <meta property="og:title" content="${ogTitle}">
-  <meta property="og:description" content="${ogDescription}">
-  <meta property="og:image" content="${ogImage}">
-  <meta property="og:url" content="${baseUrl}/?p=${articleParam}">
-  <meta property="og:type" content="article">
-  <meta property="og:site_name" content="FootPulse">
-  <meta property="og:locale" content="fr_FR">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="${ogTitle}">
-  <meta name="twitter:description" content="${ogDescription}">
-  <meta name="twitter:image" content="${ogImage}">`;
-
-        html = html.replace('<meta charset="UTF-8">', '<meta charset="UTF-8">' + ogTags);
-
-        return new Response(html, {
-          headers: { "Content-Type": "text/html; charset=utf-8" }
-        });
-      } catch (e) {
-        return env.ASSETS.fetch(request);
-      }
     }
 
     // ═══════════════════════════════════════════════════════
