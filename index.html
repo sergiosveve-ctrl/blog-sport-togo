@@ -637,7 +637,7 @@
 
                         <div class="stats-bar">
                             <div class="stat-pill">👁 <strong id="view-count">${(stats.views||0)+1}</strong> vues</div>
-                            <div class="stat-pill">❤️ <strong id="like-count">${stats.likes||0}</strong> likes</div> likes</div>
+                            <div class="stat-pill">❤️ <strong id="like-count">${stats.likes||0}</strong> likes</div>
                             <div class="stat-pill">🔗 <strong id="share-count">${stats.shares||0}</strong> partages</div>
                             ${date ? `<div class="stat-pill">📅 ${formatDate(date)}</div>` : ''}
                         </div>
@@ -702,8 +702,6 @@
         document.getElementById('btn-like')?.classList.add('active');
         const likeEl = document.getElementById('like-count');
         if (likeEl) likeEl.textContent = parseInt(likeEl.textContent||0) + 1;
-
-        await sbUpsert("article_stats", { id: fileName, views: 0, likes: 0, shares: 0 }).catch(()=>{});
         // ✅ CORRECTION : await ajouté pour attendre l'incrément
         await fetch(`${SUPABASE_URL}/rest/v1/rpc/increment_stat`, {
             method: "POST", headers: sbHeaders(),
