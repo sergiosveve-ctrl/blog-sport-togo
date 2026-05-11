@@ -639,7 +639,7 @@
 
                         <div class="stats-bar">
                             <div class="stat-pill">👁 <strong id="view-count">${(stats.views||0)+1}</strong> vues</div>
-                            <div class="stat-pill">❤️ <strong id="like-count">${stats.likes||0}</strong> likes</div>
+                            <div class="stat-pill">❤️ <strong id="like-count">${(stats.likes||0) + (liked ? 1 : 0)}</strong> likes</div>
                             <div class="stat-pill">🔗 <strong id="share-count">${stats.shares||0}</strong> partages</div>
                             ${date ? `<div class="stat-pill">📅 ${formatDate(date)}</div>` : ''}
                         </div>
